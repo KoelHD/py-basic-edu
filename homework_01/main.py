@@ -33,7 +33,7 @@ def is_prime(n):
         return False
 
 
-def filter_numbers(nums, filters):
+def filter_numbers(num, filters):
     """
     функция, которая на вход принимает список из целых чисел,
     и возвращает только чётные/нечётные/простые числа
@@ -45,8 +45,8 @@ def filter_numbers(nums, filters):
     <<< [2, 4]
     """
     if filters == ODD:
-        return [i for i in nums if i % 2 != 0]
+        return [i for i in num if i % 2 != 0]
     elif filters == EVEN:
-        return [i for i in nums if i % 2 == 0]
+        return [i for i in num if i % 2 == 0]
     else:
-        return list(filter(is_prime, nums))
+        return list(filter(is_prime, num))
