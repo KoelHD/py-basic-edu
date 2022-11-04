@@ -25,4 +25,3 @@ class Vehicle(ABC):
             self.fuel -= (self.fuel_consumption * distance)
         else:
             raise NotEnoughFuel
-
