@@ -10,7 +10,29 @@
 
 import os
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+from sqlalchemy import Column, String, Integer
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 
-Base = None
-Session = None
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+engine = create_async_engine(url=PG_CONN_URI)
+Base = declarative_base(bind=engine)
+Session = sessionmaker(engine, class_=AsyncSession)
+
+
+class User(Base):
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    username = Column(String)
+    email = Column(String)
+    post = relationship("Post", back_populates="user", uselist=True)
+
+
+class Post(Base):
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    body = Column(String)
+    user_id = Column(Integer)
+    user = relationship("User", back_populates="post", uselist=False)
+
+
