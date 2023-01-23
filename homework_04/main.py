@@ -14,9 +14,23 @@
 """
 import asyncio
 
+from homework_04.jsonplaceholder_requests import fetch_users, fetch_posts
+from homework_04.models import engine, Base
+
+
+async def create_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+
+
+async def create_users():
+    for user in fetch_users().users:
+
 
 async def async_main():
-    pass
+    await create_tables()
+    # await asyncio.gather(fetch_users(), fetch_posts())
 
 
 def main():

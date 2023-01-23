@@ -11,16 +11,17 @@
 import os
 
 from sqlalchemy import Column, String, Integer
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncEngine
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
-engine = create_async_engine(url=PG_CONN_URI)
+engine: AsyncEngine = create_async_engine(url=PG_CONN_URI)
 Base = declarative_base(bind=engine)
 Session = sessionmaker(engine, class_=AsyncSession)
 
 
 class User(Base):
+    __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String)
     username = Column(String)
@@ -29,6 +30,7 @@ class User(Base):
 
 
 class Post(Base):
+    __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
     title = Column(String)
     body = Column(String)
