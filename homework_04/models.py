@@ -10,7 +10,7 @@
 
 import os
 
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncEngine
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 
@@ -34,7 +34,7 @@ class Post(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String)
     body = Column(String)
-    user_id = Column(Integer)
+    user_id = Column(ForeignKey)
     user = relationship("User", back_populates="post", uselist=False)
 
 

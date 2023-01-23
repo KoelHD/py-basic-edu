@@ -14,8 +14,10 @@
 """
 import asyncio
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from homework_04.jsonplaceholder_requests import fetch_users, fetch_posts
-from homework_04.models import engine, Base
+from homework_04.models import engine, Base, User, Post, Session
 
 
 async def create_tables():
@@ -24,13 +26,25 @@ async def create_tables():
         await conn.run_sync(Base.metadata.create_all)
 
 
-async def create_users():
-    for user in fetch_users().users:
+async def create_users(session):
+    a = await fetch_users()
+    for usr in a:
+        user = User(name=usr.get('name'), username=usr.get('username'), email=usr.get('email'))
+        session.add(user)
+    await session.commit()
+
+
+async def create_posts(session):
+    b = await fetch_posts()
+    for post in b:
+        pst = Post(title=post.get('title'), body=post.get('body'), user_id=post.get('userId'))
+        session.add(pst)
+    await session.commit()
 
 
 async def async_main():
     await create_tables()
-    # await asyncio.gather(fetch_users(), fetch_posts())
+    await asyncio.gather(create_users(Session), create_posts(Session))
 
 
 def main():
