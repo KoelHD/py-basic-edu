@@ -22,15 +22,10 @@ def get_root():
     return render_template("index.html")
 
 
-@app.get("/index/")
-def get_index():
-    return 'test'
-
-
 @app.get('/about/')
 def get_about():
     return render_template("about.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
