@@ -1,6 +1,6 @@
 __all__ = (
     "db",
-    "products",
+    "Product",
 )
 
 from .database import db
