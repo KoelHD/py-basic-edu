@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Prod #{{ products.id }} info
+{% endblock %}
+
+{% block body %}
+    <h1>{{ products.shortname }} details</h1>
+    <div><strong>Description:</strong></div>
+    <div>
+        <p>ID: {{ products.id }}</p>
+        <p>SHORTNAME: {{ products.shortname }}</p>
+        <p>TEXTFIELD: {{ products.textfield }}</p>
+        <p>TIMESTAMP: {{ products.timestamp }}</p>
+    </div>
+{% endblock %}

@@ -10,7 +10,7 @@
     <ul class="list-group">
       {% for product in products %}
         <li class="product-list-item list-group-item">
-          <a class="product-item-link text-decoration-none">{{ product.shortname }}</a>
+          <a class="product-item-link text-decoration-none" href="{{ url_for("details", prod_id=product.id) }}">{{ product.shortname }}</a>
         </li>
       {% endfor %}
     </ul>

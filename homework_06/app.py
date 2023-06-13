@@ -38,5 +38,11 @@ def get_create():
     return render_template("create.html")
 
 
+@app.get("/product/<int:prod_id>", endpoint="details")
+def get_prod_by_id(prod_id: int):
+    products = Product.query.get_or_404(prod_id, description="Product not found")
+    return render_template("details.html", products=products)
+
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
