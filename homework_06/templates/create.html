@@ -11,6 +11,8 @@
         <form method="post">
             {{ form.name.label(class="form-label") }}
             {{ form.name(size=20, class="form-control") }}
+            {{ form.desc.label(class="form-label") }}
+            {{ form.desc(size=20, class="form-control") }}
             {% if form.name.errors %}
                 <ul class="errors">
                     {% for error in form.name.errors %}

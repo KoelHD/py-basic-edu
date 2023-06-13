@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask_migrate import Migrate
 from flask import Flask, render_template, url_for, request, redirect, flash
 from models import db, Product
@@ -47,13 +49,11 @@ def add_product():
     form = ProductForm()
     if request.method == "GET":
         return render_template("create.html", form=form)
-    if not form.validate_on_submit():
-        return render_template("create.html", form=form), 400
     name = form.name.data
     description = form.desc.data
-    product = Product(shortname=name, textfield=description)
+    product = Product(shortname=name, textfield=description, timestamp=datetime.now())
     db.session.add(product)
-    flash(f"Successfully added product {name}!")
+    db.session.commit()
     url = url_for("details", prod_id=product.id)
     return redirect(url)
 
