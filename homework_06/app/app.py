@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask_migrate import Migrate
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template, url_for, request, redirect
 from models import db, Product
 from forms import ProductForm
 
@@ -31,13 +31,13 @@ def get_about():
 @app.get("/show/", endpoint="show")
 def get_show():
     products = Product.query.all()
-    return render_template("show.html", products=products)
+    return render_template("templates/show.html", products=products)
 
 
 @app.get("/product/<int:prod_id>", endpoint="details")
 def get_prod_by_id(prod_id: int):
     products = Product.query.get_or_404(prod_id, description="Product not found")
-    return render_template("details.html", products=products)
+    return render_template("templates/details.html", products=products)
 
 
 @app.route(
@@ -48,7 +48,7 @@ def get_prod_by_id(prod_id: int):
 def add_product():
     form = ProductForm()
     if request.method == "GET":
-        return render_template("create.html", form=form)
+        return render_template("templates/create.html", form=form)
     name = form.name.data
     description = form.desc.data
     product = Product(shortname=name, textfield=description, timestamp=datetime.now())
@@ -59,4 +59,4 @@ def add_product():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
