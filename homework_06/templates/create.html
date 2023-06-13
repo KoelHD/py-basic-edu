@@ -1,10 +1,29 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    TEMP
+    Create product
 {% endblock %}
 
 {% block body %}
-    <h1>TEMP</h1>
-    <div>TEMP</div>
+    <div>
+        <div class="h3">Create a new product</div>
+
+        <form method="post">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(size=20, class="form-control") }}
+            {% if form.name.errors %}
+                <ul class="errors">
+                    {% for error in form.name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <button class="btn btn-outline-primary"
+                    type="submit">
+                Create
+            </button>
+        </form>
+    </div>
+
 {% endblock %}

@@ -11,4 +11,7 @@ class ProductForm(FlaskForm):
             DataRequired(),
         ],
     )
-    desc = TextAreaField(validators=[DataRequired()])
+    desc = TextAreaField(
+        label="Description",
+        name="product-desc",
+        validators=[DataRequired()])
