@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from os import getenv
 from flask_migrate import Migrate
 from flask import Flask, render_template, url_for, request, redirect
 from models import db, Product
@@ -8,6 +8,9 @@ from forms import ProductForm
 
 app = Flask(__name__)
 
+
+CONFIG_OBJECT = getenv("CONFIG", "DevelopmentConfig")
+app.config.from_object(f"config.{CONFIG_OBJECT}")
 app.config.update(
     ENV="development",
     SECRET_KEY="qwerty",
