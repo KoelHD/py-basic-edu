@@ -12,3 +12,5 @@ Async. SQLAlchemy. Aiohttp.
 Frontend. Flask. HTTP. CSS. Boostrap.
 ### HW_06
 Flask-SQLAlchemy. Flask-Migrate. Alembic. Docker compose. 
+### HW_07
+Django ORM, django-debug-toolbar
